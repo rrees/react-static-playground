@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wordcounter - React Playground</title>
+        <meta charset="UTF-8">
+
+        <link rel="preconnect" href="https://unpkg.com">
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    </head>
+
+    <body>
+        <h1>Wordcount</h1>
+
+        <div id="app"></div>
+
+        <script>
+            class Wordcounter extends React.Component {
+                render() {
+                    return React.createElement('section', null,
+                        React.createElement('textarea',
+                            {
+                                onChange: (event) => this.handleChange(event),
+                                value: this.state.value
+                            }),
+                        React.createElement(Count, {count: this.state.count})
+                    );
+                }
+
+                handleChange(event) {
+                    const text = event.target.value;
+                    //console.log(text);
+                    const wordcount = text ? text.match(/\w+/g).length : 0;
+                    this.setState({
+                        value: text,
+                        count: wordcount,
+                    });
+                }
+
+                constructor(props) {
+                    super(props);
+                    
+                    this.state = {
+                        value: '',
+                        count: 0
+                    }
+                }
+            }
+
+            class Count extends React.Component {
+                render() {
+                    return React.createElement('p', null, this.props.count);
+                }
+                
+            }
+
+            ReactDOM.render(
+                React.createElement(Wordcounter),
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>
