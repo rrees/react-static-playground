@@ -15,6 +15,11 @@
         <div id="app"></div>
 
         <script>
+
+            function wordCount(text) {
+                return text ? text.match(/\w+/g).length : 0;
+            }
+
             class Wordcounter extends React.Component {
                 render() {
                     return React.createElement('section', null,
@@ -30,16 +35,16 @@
                 handleChange(event) {
                     const text = event.target.value;
                     //console.log(text);
-                    const wordcount = text ? text.match(/\w+/g).length : 0;
+
                     this.setState({
                         value: text,
-                        count: wordcount,
+                        count: wordCount(text),
                     });
                 }
 
                 constructor(props) {
                     super(props);
-                    
+
                     this.state = {
                         value: '',
                         count: 0
