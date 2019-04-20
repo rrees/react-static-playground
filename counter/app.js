@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
-function Counter() {
+function Counter(props) {
 
-	const [count, setCount] = useState(0);
+	const [count, setCount] = useState(props.initialValue || 0);
 
 	function inc() {
 		setCount(count + 1);
@@ -24,5 +24,14 @@ function Counter() {
 	);
 }
 
+function CounterPage() {
+	return (
+		<div className="counter-container">
+		<Counter initialValue={0} />
+		<Counter initialValue={5} />
+		</div>
+	);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-ReactDOM.render(<Counter />, document.getElementById('app'))});
+ReactDOM.render(<CounterPage />, document.getElementById('app'))});
